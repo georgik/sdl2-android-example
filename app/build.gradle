@@ -1,0 +1,59 @@
+apply plugin: 'com.android.model.application'
+
+def lib_distribution_root = '../distribution'
+
+model {
+    repositories {
+        libs(PrebuiltLibraries) {
+            SDL2 {
+                headers.srcDir "../SDL2/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
+                }
+            }
+            main {
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/main/lib/${targetPlatform.getName()}/libmain.so")
+                }
+            }
+        }
+    }
+
+    android {
+        compileSdkVersion = gradle.sdkVersion
+        buildToolsVersion = '25.0.3'
+
+        defaultConfig {
+            applicationId = 'rocks.georgik.sdlapp'
+            minSdkVersion.apiLevel = 4
+            targetSdkVersion.apiLevel = gradle.sdkVersion
+        }
+        sources {
+            main {
+                jni {
+                    dependencies {
+                        project ':main' linkage 'shared'
+                    }   
+                }   
+                jniLibs {
+                    source {
+                        srcDir "${lib_distribution_root}/main/lib"
+                    }   
+                }   
+            }   
+        }   
+
+        buildTypes {
+            release {
+                minifyEnabled = false
+                proguardFiles.add(file('proguard-rules.txt'))
+            }
+        }
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name.contains('compile')) {
+        task.dependsOn ':main:distributeLib'
+    }
+}

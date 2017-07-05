@@ -1,0 +1,15 @@
+buildscript {
+    repositories {
+       jcenter()
+    }
+    dependencies {
+        // Android native build plugin compatible with Gradle 4
+        classpath 'com.android.tools.build:gradle-experimental:0.11.0-alpha-preview-02'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}

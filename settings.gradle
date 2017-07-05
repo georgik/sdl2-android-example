@@ -1,0 +1,5 @@
+gradle.ext.sdkVersion = 21
+
+include ':app'
+include ':SDL2'
+include ':main'
