@@ -1,0 +1,65 @@
+apply plugin: 'com.android.model.native'
+
+def lib_distribution_root = '../distribution'
+model {
+     repositories {
+        libs(PrebuiltLibraries) {
+            SDL2 {
+                headers.srcDir "../SDL2/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
+                }
+            }
+
+        }
+    }
+
+   android {
+        compileSdkVersion = 19
+        buildToolsVersion = '25.0.3'
+
+        defaultConfig {
+            minSdkVersion.apiLevel = 13
+            targetSdkVersion.apiLevel = 19
+            versionCode = 1
+            versionName = '1.0'
+        }
+        ndk {
+            moduleName = 'main'
+            cppFlags.addAll([
+                    "-I" + file("../SDL2/include/").absolutePath,
+            ])
+            CFlags.addAll([
+                    "-I" + file("../SDL2/include/").absolutePath,
+            ])
+            stl "stlport_static"
+        }
+
+        sources {
+            main {
+                jni {
+                    dependencies {
+                        library 'SDL2' linkage 'shared'
+                    }
+                    source {
+                        srcDirs 'src/'
+                        srcDirs '../SDL2/src/main/android/'
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+// This is just copy out the header file and built lib into distribution
+// directory for clint application to use; it is a small overhead of this sample:
+//    both lib and app are put inside one project space [save maintenance time]
+task(distributeLib, type : Copy) {
+    // trigger build library
+    dependsOn assemble
+    into '../distribution/main/'
+    from('build/outputs/native/release/lib') {
+        into 'lib/'
+    }
+}
