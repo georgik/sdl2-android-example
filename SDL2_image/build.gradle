@@ -1,0 +1,70 @@
+apply plugin: 'com.android.model.native'
+
+def lib_distribution_root = '../distribution'
+model {
+
+    repositories {
+        libs(PrebuiltLibraries) {
+            /*png {
+                headers.srcDir "../png/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/png/lib/${targetPlatform.getName()}/libpng.so")
+                }
+            }*/
+
+            SDL2 {
+                headers.srcDir "../SDL2/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
+                }
+            }
+        }
+    }
+
+    android {
+        compileSdkVersion = gradle.sdkVersion
+        buildToolsVersion = '25.0.3'
+
+        defaultConfig {
+            minSdkVersion.apiLevel = 13
+            targetSdkVersion.apiLevel = gradle.sdkVersion
+            versionCode = 1
+            versionName = '1.0'
+        }
+        ndk {
+            moduleName = 'SDL2_image'
+            ldLibs.addAll(["GLESv1_CM", "EGL", "GLESv2", "log", "android", "dl"])
+            CFlags.addAll(["-DGL_GLEXT_PROTOTYPES"])
+            CFlags.addAll(["-I" + file("include/").absolutePath,
+                           "-DGL_GLEXT_PROTOTYPES",
+                           //"-DLOAD_PNG",
+                           "-DLOAD_XPM"
+            ])
+        }
+
+        sources {
+            main {
+                jni {
+                    dependencies {
+                        library 'SDL2' linkage 'shared'
+                        //library 'png' linkage 'shared'
+                    }
+                    source {
+                        srcDir "src"
+
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+task(distributeLib, type : Copy) {
+    // trigger build library
+    dependsOn assemble
+    into '../distribution/SDL2_image/'
+    from('build/outputs/native/release/lib') {
+        into 'lib/'
+    }
+}

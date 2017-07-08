@@ -10,6 +10,12 @@ model {
                     sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
                 }
             }
+            SDL2_image {
+                headers.srcDir "../SDL2_image/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_image/lib/${targetPlatform.getName()}/libSDL2_image.so")
+                }
+            }
 
         }
     }
@@ -28,9 +34,11 @@ model {
             moduleName = 'main'
             cppFlags.addAll([
                     "-I" + file("../SDL2/include/").absolutePath,
+                    "-I" + file("../SDL2_image/include/").absolutePath,
             ])
             CFlags.addAll([
                     "-I" + file("../SDL2/include/").absolutePath,
+                    "-I" + file("../SDL2_image/include/").absolutePath,
             ])
             stl "stlport_static"
         }
@@ -40,10 +48,12 @@ model {
                 jni {
                     dependencies {
                         library 'SDL2' linkage 'shared'
+                        library 'SDL2_image' linkage 'shared'
                     }
                     source {
                         srcDirs 'src/'
                         srcDirs '../SDL2/src/main/android/'
+                        srcDirs '../SDL2_image/src/main/android/'
                     }
                 }
             }
@@ -52,9 +62,6 @@ model {
     }
 }
 
-// This is just copy out the header file and built lib into distribution
-// directory for clint application to use; it is a small overhead of this sample:
-//    both lib and app are put inside one project space [save maintenance time]
 task(distributeLib, type : Copy) {
     // trigger build library
     dependsOn assemble

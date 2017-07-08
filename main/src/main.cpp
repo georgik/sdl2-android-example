@@ -1,5 +1,35 @@
 #include "SDL.h"
+#include "SDL_image.h"
 #include <stdio.h>
+
+static char * icon_xpm[] = {
+        "32 23 3 1",
+        "     c #FFFFFF",
+        ".    c #000000",
+        "+    c #FFFF00",
+        "                                ",
+        "            ........            ",
+        "          ..++++++++..          ",
+        "         .++++++++++++.         ",
+        "        .++++++++++++++.        ",
+        "       .++++++++++++++++.       ",
+        "      .++++++++++++++++++.      ",
+        "      .+++....++++....+++.      ",
+        "     .++++.. .++++.. .++++.     ",
+        "     .++++....++++....++++.     ",
+        "     .++++++++++++++++++++.     ",
+        "     .++++++++++++++++++++.     ",
+        "     .+++++++++..+++++++++.     ",
+        "     .+++++++++..+++++++++.     ",
+        "     .++++++++++++++++++++.     ",
+        "      .++++++++++++++++++.      ",
+        "      .++...++++++++...++.      ",
+        "       .++............++.       ",
+        "        .++..........++.        ",
+        "         .+++......+++.         ",
+        "          ..++++++++..          ",
+        "            ........            ",
+        "                                "};
 
 int main(int argc, char* argv[]) {
 
@@ -30,6 +60,13 @@ int main(int argc, char* argv[]) {
     SDL_Renderer* renderer = NULL;
     renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
 
+    surface = IMG_ReadXPMFromArray(icon_xpm);
+    texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (!texture) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "Couldn't load texture: %s", SDL_GetError());
+        return(2);
+    }
 
     // Set render color to red ( background will be rendered in this color )
     SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255 );
@@ -54,7 +91,12 @@ int main(int argc, char* argv[]) {
     SDL_RenderFillRect( renderer, &r );
 
     // Display image
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
+    SDL_Rect dstrect;
+    dstrect.x = 0;
+    dstrect.y = 0;
+    dstrect.w = 128;
+    dstrect.h = 128;
+    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
     // Render the rect to the screen
     SDL_RenderPresent(renderer);

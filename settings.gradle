@@ -2,4 +2,5 @@ gradle.ext.sdkVersion = 21
 
 include ':app'
 include ':SDL2'
+include ':SDL2_image'
 include ':main'
