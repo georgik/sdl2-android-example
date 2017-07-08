@@ -8,7 +8,9 @@ Source code:
 
 ## Build
 
+  ```
   gradle :SDL2:distributeLib
   gradle :SDL2_image:distributeLib
   gradle installDebug
+  ```
 
