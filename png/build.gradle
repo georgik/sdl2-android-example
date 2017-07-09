@@ -1,0 +1,56 @@
+apply plugin: 'com.android.model.native'
+
+def lib_distribution_root = '../distribution'
+model {
+
+    repositories {
+        libs(PrebuiltLibraries) {
+            zip {
+                headers.srcDir "../zip/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/zip/lib/${targetPlatform.getName()}/libzip.so")
+                }
+            }
+        }
+    }
+
+    android {
+        compileSdkVersion = gradle.sdkVersion
+        buildToolsVersion = '25.0.3'
+
+        defaultConfig {
+            minSdkVersion.apiLevel = 13
+            targetSdkVersion.apiLevel = gradle.sdkVersion
+            versionCode = 1
+            versionName = '1.0'
+        }
+        ndk {
+            moduleName = 'png'
+            ldLibs.addAll(["GLESv1_CM", "EGL", "GLESv2", "log", "android", "dl", "z"])
+            CFlags.addAll([
+                           "-DGL_GLEXT_PROTOTYPES"
+            ])
+            CFlags.addAll(["-I" + file("include/").absolutePath,"-DGL_GLEXT_PROTOTYPES"])
+        }
+
+        sources {
+            main {
+                jni {
+                    source {
+                        srcDir "src"
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+task(distributeLib, type : Copy) {
+    // trigger build library
+    dependsOn assemble
+    into '../distribution/png/'
+    from('build/outputs/native/release/lib') {
+        into 'lib/'
+    }
+}
