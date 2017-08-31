@@ -76,27 +76,44 @@ int main(int argc, char* argv[]) {
 
     // Display image
     SDL_Rect dstrect;
-    dstrect.x = 0;
-    dstrect.y = 0;
-    dstrect.w = 128;
-    dstrect.h = 128;
-    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
 
     // Load smiley.png and display it.
     // Location of image files for Android is: app/src/main/assets
-    SDL_Surface *loadedSurface = IMG_Load( "smiley.png" );
+    SDL_Surface *loadedSurface = IMG_Load("smiley.png");
     if (!loadedSurface) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't load PNG image: %s", SDL_GetError());
         return(3);
     }
 
-    SDL_Texture *smileyTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+    SDL_Surface *backgroundSurface = IMG_Load("brno-snow.jpg");
+    if (!backgroundSurface) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "Couldn't load JPG image: %s", SDL_GetError());
+        return(4);
+    }
+
+
+    dstrect.x = 0;
+    dstrect.y = 0;
+    dstrect.w = backgroundSurface->w;
+    dstrect.h = backgroundSurface->h;
+    SDL_Texture *backgroundTexture = SDL_CreateTextureFromSurface(renderer, backgroundSurface);
+    SDL_RenderCopy(renderer, backgroundTexture, NULL, &dstrect);
+
     dstrect.x = 130;
     dstrect.y = 130;
     dstrect.w = loadedSurface->w;
     dstrect.h = loadedSurface->h;
+    SDL_Texture *smileyTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     SDL_RenderCopy(renderer, smileyTexture, NULL, &dstrect);
+
+    dstrect.x = 0;
+    dstrect.y = 0;
+    dstrect.w = 128;
+    dstrect.h = 128;
+    SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
     // Render the rect to the screen
     SDL_RenderPresent(renderer);

@@ -5,6 +5,12 @@ model {
 
     repositories {
         libs(PrebuiltLibraries) {
+            SDL2_jpeg {
+                headers.srcDir "../SDL2_jpeg/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_jpeg/lib/${targetPlatform.getName()}/libSDL2_jpeg.so")
+                }
+            }
             png {
                 headers.srcDir "../png/include"
                 binaries.withType(SharedLibraryBinary) {
@@ -36,6 +42,7 @@ model {
             CFlags.addAll(["-DGL_GLEXT_PROTOTYPES"])
             CFlags.addAll(["-I" + file("include/").absolutePath,
                            "-DGL_GLEXT_PROTOTYPES",
+                           "-DLOAD_JPG",
                            "-DLOAD_PNG",
                            "-DLOAD_XPM"
             ])
@@ -46,6 +53,7 @@ model {
                 jni {
                     dependencies {
                         library 'SDL2' linkage 'shared'
+                        library 'SDL2_jpeg' linkage 'shared'
                         library 'png' linkage 'shared'
                     }
                     source {
