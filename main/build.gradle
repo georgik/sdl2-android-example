@@ -16,6 +16,12 @@ model {
                     sharedLibraryFile = file("${lib_distribution_root}/SDL2_jpeg/lib/${targetPlatform.getName()}/libSDL2_jpeg.so")
                 }
             }
+            SDL2_png {
+                headers.srcDir "../SDL2_png/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_png/lib/${targetPlatform.getName()}/libSDL2_png.so")
+                }
+            }
             SDL2_image {
                 headers.srcDir "../SDL2_image/include"
                 binaries.withType(SharedLibraryBinary) {
@@ -55,6 +61,7 @@ model {
                     dependencies {
                         library 'SDL2' linkage 'shared'
                         library 'SDL2_jpeg' linkage 'shared'
+                        library 'SDL2_png' linkage 'shared'
                         library 'SDL2_image' linkage 'shared'
                     }
                     source {

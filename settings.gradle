@@ -1,9 +1,9 @@
-gradle.ext.sdkVersion = 21
+gradle.ext.sdkVersion = 19
 
 include ':app'
 include ':SDL2'
-include ':SDL2_image'
 include ':SDL2_jpeg'
-include ':main'
-include ':png'
 include ':zip'
+include ':SDL2_png'
+include ':SDL2_image'
+include ':main'

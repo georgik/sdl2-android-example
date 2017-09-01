@@ -25,7 +25,7 @@ model {
             versionName = '1.0'
         }
         ndk {
-            moduleName = 'png'
+            moduleName = 'SDL2_png'
             ldLibs.addAll(["GLESv1_CM", "EGL", "GLESv2", "log", "android", "dl", "z"])
             CFlags.addAll([
                            "-DGL_GLEXT_PROTOTYPES"
@@ -49,7 +49,7 @@ model {
 task(distributeLib, type : Copy) {
     // trigger build library
     dependsOn assemble
-    into '../distribution/png/'
+    into '../distribution/SDL2_png/'
     from('build/outputs/native/release/lib') {
         into 'lib/'
     }
