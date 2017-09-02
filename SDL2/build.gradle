@@ -7,7 +7,6 @@ model {
 
         defaultConfig {
             minSdkVersion.apiLevel = 13
-            targetSdkVersion.apiLevel = gradle.sdkVersion
             versionCode = 1
             versionName = '1.0'
         }
