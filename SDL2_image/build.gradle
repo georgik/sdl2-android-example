@@ -3,29 +3,6 @@ apply plugin: 'com.android.model.native'
 def lib_distribution_root = '../distribution'
 model {
 
-    repositories {
-        libs(PrebuiltLibraries) {
-            SDL2_jpeg {
-                headers.srcDir "../SDL2_jpeg/include"
-                binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_jpeg/lib/${targetPlatform.getName()}/libSDL2_jpeg.so")
-                }
-            }
-            SDL2_png {
-                headers.srcDir "../SDL2_png/include"
-                binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_png/lib/${targetPlatform.getName()}/libSDL2_png.so")
-                }
-            }
-            SDL2 {
-                headers.srcDir "../SDL2/include"
-                binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
-                }
-            }
-        }
-    }
-
     android {
         compileSdkVersion = gradle.sdkVersion
         buildToolsVersion = '25.0.3'
@@ -51,9 +28,14 @@ model {
             main {
                 jni {
                     dependencies {
-                        library 'SDL2' linkage 'shared'
-                        library 'SDL2_jpeg' linkage 'shared'
-                        library 'SDL2_png' linkage 'shared'
+                        project ':SDL2' linkage 'shared'
+                        project ':SDL2_jpeg' linkage 'shared'
+                        project ':SDL2_png' linkage 'shared'
+                    }
+                    exportedHeaders {
+                        srcDir "../SDL2/include"
+                        srcDir "../SDL2_jpeg/include"
+                        srcDir "../SDL2_png/include"
                     }
                     source {
                         srcDir "src"
@@ -66,7 +48,7 @@ model {
     }
 }
 
-task distributeLib(type : Copy, dependsOn: [':SDL2_jpeg:distributeLib', ':SDL2_png:distributeLib']) {
+task distributeLib(type : Copy) {
     // trigger build library
     dependsOn assemble
     into '../distribution/SDL2_image/'
