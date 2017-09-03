@@ -1,6 +1,5 @@
 apply plugin: 'com.android.model.native'
 
-def lib_distribution_root = '../distribution'
 model {
 
     android {
@@ -49,9 +48,8 @@ model {
 }
 
 task distributeLib(type : Copy) {
-    // trigger build library
     dependsOn assemble
-    into '../distribution/SDL2_image/'
+    into gradle.libDistributionRoot +'/SDL2_image/'
     from('build/outputs/native/release/lib') {
         into 'lib/'
     }

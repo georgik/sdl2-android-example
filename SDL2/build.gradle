@@ -135,7 +135,7 @@ model {
 task(distributeLib, type : Copy) {
     // trigger build library
     dependsOn assemble
-    into '../distribution/SDL2/'
+    into gradle.libDistributionRoot + '/SDL2/'
     from('build/outputs/native/release/lib') {
         into 'lib/'
     }

@@ -1,31 +1,30 @@
 apply plugin: 'com.android.model.native'
 
-def lib_distribution_root = '../distribution'
 model {
      repositories {
         libs(PrebuiltLibraries) {
             SDL2 {
                 headers.srcDir "../SDL2/include"
                 binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
                 }
             }
             SDL2_jpeg {
                 headers.srcDir "../SDL2_jpeg/include"
                 binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_jpeg/lib/${targetPlatform.getName()}/libSDL2_jpeg.so")
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2_jpeg/lib/${targetPlatform.getName()}/libSDL2_jpeg.so")
                 }
             }
             SDL2_png {
                 headers.srcDir "../SDL2_png/include"
                 binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_png/lib/${targetPlatform.getName()}/libSDL2_png.so")
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2_png/lib/${targetPlatform.getName()}/libSDL2_png.so")
                 }
             }
             SDL2_image {
                 headers.srcDir "../SDL2_image/include"
                 binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2_image/lib/${targetPlatform.getName()}/libSDL2_image.so")
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2_image/lib/${targetPlatform.getName()}/libSDL2_image.so")
                 }
             }
 
@@ -33,7 +32,7 @@ model {
     }
 
    android {
-        compileSdkVersion = 19
+        compileSdkVersion = gradle.sdkVersion
         buildToolsVersion = '25.0.3'
 
         defaultConfig {
@@ -65,8 +64,6 @@ model {
                     }
                     source {
                         srcDirs 'src/'
-                        srcDirs '../SDL2/src/main/android/'
-                        srcDirs '../SDL2_image/src/main/android/'
                     }
                 }
             }
@@ -78,7 +75,7 @@ model {
 task(distributeLib, type : Copy) {
     // trigger build library
     dependsOn assemble
-    into '../distribution/main/'
+    into gradle.libDistributionRoot + '/main/'
     from('build/outputs/native/release/lib') {
         into 'lib/'
     }

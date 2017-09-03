@@ -1,19 +1,6 @@
 apply plugin: 'com.android.model.native'
 
-def lib_distribution_root = '../distribution'
 model {
-
-    repositories {
-        libs(PrebuiltLibraries) {
-            zip {
-                headers.srcDir "../zip/include"
-                binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/zip/lib/${targetPlatform.getName()}/libzip.so")
-                }
-            }
-        }
-    }
-
     android {
         compileSdkVersion = gradle.sdkVersion
         buildToolsVersion = '25.0.3'
@@ -35,6 +22,12 @@ model {
         sources {
             main {
                 jni {
+                    dependencies {
+                        project ':zip' linkage 'shared'
+                    }
+                    exportedHeaders {
+                        srcDir "../zip/include"
+                    }
                     source {
                         srcDir "src"
                     }
@@ -48,7 +41,7 @@ model {
 task(distributeLib, type : Copy) {
     // trigger build library
     dependsOn assemble
-    into '../distribution/SDL2_png/'
+    into gradle.libDistributionRoot + '/SDL2_png/'
     from('build/outputs/native/release/lib') {
         into 'lib/'
     }

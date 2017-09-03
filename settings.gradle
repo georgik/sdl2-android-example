@@ -1,4 +1,5 @@
 gradle.ext.sdkVersion = 19
+gradle.ext.libDistributionRoot = '../distribution'
 
 include ':app'
 include ':SDL2'

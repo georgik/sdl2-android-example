@@ -1,10 +1,6 @@
 apply plugin: 'com.android.model.native'
 
-def lib_distribution_root = '../distribution'
 model {
-
-    repositories {
-    }
 
     android {
         compileSdkVersion = gradle.sdkVersion
@@ -42,7 +38,7 @@ model {
 task(distributeLib, type : Copy) {
     // trigger build library
     dependsOn assemble
-    into '../distribution/zip/'
+    into gradle.libDistributionRoot + '/zip/'
     from('build/outputs/native/release/lib') {
         into 'lib/'
     }

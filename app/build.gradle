@@ -1,19 +1,17 @@
 apply plugin: 'com.android.model.application'
 
-def lib_distribution_root = '../distribution'
-
 model {
     repositories {
         libs(PrebuiltLibraries) {
             SDL2 {
                 headers.srcDir "../SDL2/include"
                 binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
                 }
             }
             main {
                 binaries.withType(SharedLibraryBinary) {
-                    sharedLibraryFile = file("${lib_distribution_root}/main/lib/${targetPlatform.getName()}/libmain.so")
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/main/lib/${targetPlatform.getName()}/libmain.so")
                 }
             }
         }
@@ -36,7 +34,7 @@ model {
                 }   
                 jniLibs {
                     source {
-                        srcDir "${lib_distribution_root}/main/lib"
+                        srcDir "${gradle.libDistributionRoot}/main/lib"
                     }   
                 }   
             }   
