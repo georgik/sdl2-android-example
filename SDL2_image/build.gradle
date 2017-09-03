@@ -66,7 +66,7 @@ model {
     }
 }
 
-task(distributeLib, type : Copy) {
+task distributeLib(type : Copy, dependsOn: [':SDL2_jpeg:distributeLib', ':SDL2_png:distributeLib']) {
     // trigger build library
     dependsOn assemble
     into '../distribution/SDL2_image/'
