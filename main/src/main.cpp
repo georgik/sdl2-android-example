@@ -108,8 +108,8 @@ int main(int argc, char* argv[]) {
     SDL_Texture *smileyTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
     SDL_RenderCopy(renderer, smileyTexture, NULL, &dstrect);
 
-    dstrect.x = 0;
-    dstrect.y = 0;
+    dstrect.x = 20;
+    dstrect.y = 20;
     dstrect.w = 128;
     dstrect.h = 128;
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
@@ -117,7 +117,31 @@ int main(int argc, char* argv[]) {
     // Render to the screen
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(4000);
+    // Event loop
+    bool quit = false;
+    SDL_Event event;
+    while(!quit && SDL_WaitEvent(&event)) {
+        switch (event.type) {
+            case SDL_QUIT:
+                quit = true;
+                break;
+            case SDL_KEYDOWN:
+                if ((event.key.keysym.sym == SDLK_AC_BACK) || (event.key.keysym.sym == SDLK_ESCAPE)) {
+                    quit = true;
+                }
+                break;
+
+            case SDL_FINGERDOWN: {
+                dstrect.x = event.tfinger.x * loadedSurface->w;
+                dstrect.y = event.tfinger.y * loadedSurface->h;
+                SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+                SDL_RenderPresent(renderer);
+                break;
+            }
+            default:
+                break;
+        }
+    }
 
     // Close and destroy the window
     SDL_DestroyWindow(window);
