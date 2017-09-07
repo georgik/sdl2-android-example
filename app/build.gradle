@@ -49,6 +49,10 @@ model {
     }
 }
 
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+
 tasks.whenTaskAdded { task ->
     if (task.name.contains('compile')) {
         task.dependsOn ':main:distributeLib'

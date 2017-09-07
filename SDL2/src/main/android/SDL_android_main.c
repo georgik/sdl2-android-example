@@ -17,10 +17,10 @@
 extern void SDL_Android_Init(JNIEnv* env, jclass cls);
 
 /* This prototype is needed to prevent a warning about the missing prototype for global function below */
-JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jobject array);
+JNIEXPORT int JNICALL Java_rocks_georgik_sdlapp_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jobject array);
 
 /* Start up the SDL app */
-JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jobject array)
+JNIEXPORT int JNICALL Java_rocks_georgik_sdlapp_SDLActivity_nativeInit(JNIEnv* env, jclass cls, jobject array)
 {
     int i;
     int argc;

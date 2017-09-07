@@ -1,4 +1,4 @@
-package org.libsdl.app;
+package rocks.georgik.sdlapp;
 
 import java.io.IOException;
 import java.io.InputStream;
