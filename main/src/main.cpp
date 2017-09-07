@@ -55,7 +55,6 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // The window is open: could enter program loop here (see SDL_PollEvent())
     // Setup renderer
     SDL_Renderer* renderer = NULL;
     renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
@@ -115,11 +114,9 @@ int main(int argc, char* argv[]) {
     dstrect.h = 128;
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
-    // Render the rect to the screen
+    // Render to the screen
     SDL_RenderPresent(renderer);
 
-    // Render the rect to the screen
-    SDL_RenderPresent(renderer);
     SDL_Delay(4000);
 
     // Close and destroy the window
