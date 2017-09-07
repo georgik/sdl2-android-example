@@ -22,12 +22,6 @@ model {
         sources {
             main {
                 jni {
-                    dependencies {
-                        project ':zip' linkage 'shared'
-                    }
-                    exportedHeaders {
-                        srcDir "../zip/include"
-                    }
                     source {
                         srcDir "src"
                     }

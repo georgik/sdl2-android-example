@@ -10,7 +10,6 @@ Source code:
 
 Libraries were assembled from:
 
-- libzip - derrived from https://github.com/julienr/libzip-android
 - libSDL2_png - derrived from https://github.com/julienr/libpng-android
     - applied patch - https://github.com/julienr/libpng-android/issues/6
     - renamed to SDL2_png, because of problem with png library in API level 19 - http://georgik.rocks/sdl2-for-android-api-level-19/
@@ -35,7 +34,6 @@ If you want to build library one by one, then you can specify name of library as
 
   ```
   gradle :SDL2:distributeLib
-  gradle :zip:distributeLib
   gradle :SDL2_png:distributeLib
   gradle :SDL2_jpeg:distributeLib
   gradle :SDL2_image:distributeLib
