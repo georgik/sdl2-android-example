@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "SDL_image.h"
-#include <stdio.h>
+#include "SDL_mixer.h"
 
 static char * icon_xpm[] = {
         "32 23 3 1",
@@ -55,6 +55,19 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1 ) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "Couldn't open mixer: %s", SDL_GetError());
+        return 2;
+    }
+
+    Mix_Chunk *sample = Mix_LoadWAV("cuckoo.wav");
+    if (sample == NULL) {
+        fprintf(stderr, "Unable to load wave file\n");
+        return 3;
+    }
+
+
     // Setup renderer
     SDL_Renderer* renderer = NULL;
     renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
@@ -64,7 +77,7 @@ int main(int argc, char* argv[]) {
     if (!texture) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't load texture: %s", SDL_GetError());
-        return(2);
+        return 4;
     }
 
     // Set render color to red ( background will be rendered in this color )
@@ -83,14 +96,14 @@ int main(int argc, char* argv[]) {
     if (!loadedSurface) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't load PNG image: %s", SDL_GetError());
-        return(3);
+        return 5;
     }
 
     SDL_Surface *backgroundSurface = IMG_Load("brno-snow.jpg");
     if (!backgroundSurface) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't load JPG image: %s", SDL_GetError());
-        return(4);
+        return 6;
     }
 
 
@@ -132,6 +145,7 @@ int main(int argc, char* argv[]) {
                 break;
 
             case SDL_FINGERDOWN: {
+                Mix_PlayChannel(-1, sample, 0);
                 dstrect.x = event.tfinger.x * loadedSurface->w;
                 dstrect.y = event.tfinger.y * loadedSurface->h;
                 SDL_RenderCopy(renderer, texture, NULL, &dstrect);
@@ -142,6 +156,8 @@ int main(int argc, char* argv[]) {
                 break;
         }
     }
+
+    Mix_CloseAudio();
 
     // Close and destroy the window
     SDL_DestroyWindow(window);
