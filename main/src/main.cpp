@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
+#include "SDL_ttf.h"
 
 static char * icon_xpm[] = {
         "32 23 3 1",
@@ -106,6 +107,19 @@ int main(int argc, char* argv[]) {
         return 6;
     }
 
+    // Initialize TTF
+    if (TTF_Init() == -1) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "TTF_Init: %s\n", TTF_GetError());
+        return 7;
+    }
+
+    // Load font
+    TTF_Font *font = TTF_OpenFont("blazed.ttf", 32);
+    if (!font) {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
+                     "Unable to load font: %s\n", TTF_GetError());
+        return 8;
+    }
 
     dstrect.x = 0;
     dstrect.y = 0;
@@ -114,7 +128,7 @@ int main(int argc, char* argv[]) {
     SDL_Texture *backgroundTexture = SDL_CreateTextureFromSurface(renderer, backgroundSurface);
     SDL_RenderCopy(renderer, backgroundTexture, NULL, &dstrect);
 
-    dstrect.x = 130;
+    dstrect.x = 190;
     dstrect.y = 130;
     dstrect.w = loadedSurface->w;
     dstrect.h = loadedSurface->h;
@@ -122,10 +136,22 @@ int main(int argc, char* argv[]) {
     SDL_RenderCopy(renderer, smileyTexture, NULL, &dstrect);
 
     dstrect.x = 20;
-    dstrect.y = 20;
+    dstrect.y = 120;
     dstrect.w = 128;
     dstrect.h = 128;
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+
+    dstrect.x = 0;
+    dstrect.y = 0;
+    dstrect.w = 450;
+    dstrect.h = 100;
+    SDL_Color textColor = { 255, 240, 0, 255 };
+    SDL_Surface* solid = TTF_RenderText_Solid(font, "SDL2 Android Example", textColor);
+
+    SDL_Texture* solidTexture = SDL_CreateTextureFromSurface(renderer, solid);
+    SDL_RenderCopy(renderer, solidTexture, NULL, &dstrect);
+    SDL_FreeSurface(solid);
+
 
     // Render to the screen
     SDL_RenderPresent(renderer);
@@ -148,6 +174,8 @@ int main(int argc, char* argv[]) {
                 Mix_PlayChannel(-1, sample, 0);
                 dstrect.x = event.tfinger.x * loadedSurface->w;
                 dstrect.y = event.tfinger.y * loadedSurface->h;
+                dstrect.w = 128;
+                dstrect.h = 128;
                 SDL_RenderCopy(renderer, texture, NULL, &dstrect);
                 SDL_RenderPresent(renderer);
                 break;

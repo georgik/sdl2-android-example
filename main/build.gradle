@@ -33,6 +33,19 @@ model {
                     sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2_mixer/lib/${targetPlatform.getName()}/libSDL2_mixer.so")
                 }
             }
+            SDL2_ttf {
+                headers.srcDir "../SDL2_ttf/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2_ttf/lib/${targetPlatform.getName()}/libSDL2_ttf.so")
+                }
+            }
+            freetype {
+                headers.srcDir "../freetype/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/freetype/lib/${targetPlatform.getName()}/libfreetype.so")
+                }
+            }
+
         }
     }
 
@@ -67,6 +80,8 @@ model {
                         library 'SDL2_png' linkage 'shared'
                         library 'SDL2_image' linkage 'shared'
                         library 'SDL2_mixer' linkage 'shared'
+                        library 'SDL2_ttf' linkage 'shared'
+                        library 'freetype' linkage 'shared'
                     }
                     source {
                         srcDirs 'src/'

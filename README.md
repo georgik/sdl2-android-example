@@ -44,3 +44,4 @@ If you want to build library one by one, then you can specify name of library as
 
 ## Assets
 - Cuckoo Clock Sound - http://soundbible.com/1261-Cuckoo-Clock.html
+- Blazed font - http://www.all-free-download.com/
