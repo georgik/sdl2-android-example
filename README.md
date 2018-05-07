@@ -8,7 +8,11 @@ Source code:
 
 ## Dependencies
 
-Libraries were assembled from:
+### Gradle
+
+The project contains Gradle 4.4 wrapper. Gradle 4.7 is not compatible with model from Android Experimental Plugin.
+
+### Libraries
 
 - libSDL2_png - derrived from https://github.com/julienr/libpng-android
     - applied patch - https://github.com/julienr/libpng-android/issues/6
