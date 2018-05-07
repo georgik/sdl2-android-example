@@ -9,6 +9,12 @@ model {
                     sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2/lib/${targetPlatform.getName()}/libSDL2.so")
                 }
             }
+            SDL2_gfx {
+                headers.srcDir "../SDL2_gfx/include"
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile = file("${gradle.libDistributionRoot}/SDL2_gfx/lib/${targetPlatform.getName()}/libSDL2_gfx.so")
+                }
+            }
             SDL2_jpeg {
                 headers.srcDir "../SDL2_jpeg/include"
                 binaries.withType(SharedLibraryBinary) {
@@ -76,6 +82,7 @@ model {
                 jni {
                     dependencies {
                         library 'SDL2' linkage 'shared'
+                        library 'SDL2_gfx' linkage 'shared'
                         library 'SDL2_jpeg' linkage 'shared'
                         library 'SDL2_png' linkage 'shared'
                         library 'SDL2_image' linkage 'shared'
