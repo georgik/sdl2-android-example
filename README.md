@@ -40,6 +40,7 @@ If you want to build library one by one, then you can specify name of library as
 
   ```
   gradle :SDL2:distributeLib
+  gradle :SDL2_gfx:distributeLib
   gradle :SDL2_png:distributeLib
   gradle :SDL2_jpeg:distributeLib
   gradle :SDL2_image:distributeLib
