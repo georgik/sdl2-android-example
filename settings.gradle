@@ -1,3 +1,4 @@
+gradle.ext.buildToolsVersion = '27.0.3'
 gradle.ext.sdkVersion = 19
 gradle.ext.minSdkVersion = 13
 gradle.ext.libDistributionRoot = '../distribution'

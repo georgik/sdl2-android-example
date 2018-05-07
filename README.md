@@ -12,6 +12,8 @@ Source code:
 
 The project contains Gradle 4.4 wrapper. Gradle 4.7 is not compatible with model from Android Experimental Plugin.
 
+Android build Tools are set to 27.0.3 in file settings.gradle. Make sure to download those tools via Android Studio.
+
 ### Libraries
 
 - libSDL2_png - derrived from https://github.com/julienr/libpng-android
