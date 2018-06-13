@@ -14,6 +14,9 @@ The project contains Gradle 4.4 wrapper. Gradle 4.7 is not compatible with model
 
 Android build Tools are set to 27.0.3 in file settings.gradle. Make sure to download those tools via Android Studio.
 
+NDK in version 16 (not NDK v17) - more information: https://georgik.rocks/android-studio-ndk-could-not-start-mips64el-linux-android-strip/
+
+
 ### Libraries
 
 - libSDL2_png - derrived from https://github.com/julienr/libpng-android
