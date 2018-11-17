@@ -24,6 +24,7 @@ model {
         defaultConfig {
             applicationId = 'rocks.georgik.sdlapp'
             minSdkVersion.apiLevel = gradle.minSdkVersion
+            targetSdkVersion.apiLevel = gradle.targetSdkVersion
         }
         sources {
             main {
