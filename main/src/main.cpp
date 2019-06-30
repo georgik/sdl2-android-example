@@ -1,9 +1,9 @@
-#include "SDL.h"
+/*#include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include "SDL2_gfxPrimitives.h"
 #include "SDL_ttf.h"
-
+*/
 static char * icon_xpm[] = {
         "32 23 3 1",
         "     c #FFFFFF",
@@ -34,7 +34,7 @@ static char * icon_xpm[] = {
         "                                "};
 
 int main(int argc, char* argv[]) {
-
+/*
     SDL_Window *window;                    // Declare a pointer
     SDL_Surface *surface;
     SDL_Texture *texture;
@@ -195,5 +195,6 @@ int main(int argc, char* argv[]) {
 
     // Clean up
     SDL_Quit();
+    */
     return 0;
 }

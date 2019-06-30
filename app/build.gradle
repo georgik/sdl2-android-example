@@ -50,12 +50,12 @@ apply plugin: 'kotlin-android-extensions'
                 proguardFiles.add(file('proguard-rules.txt'))
             }
         }
-        /*externalNativeBuild {
+        externalNativeBuild {
             cmake {
                 path "../main/CMakeLists.txt"
                 version "3.10.2"
             }
-        }*/
+        }
     }
 /*}*/
 
