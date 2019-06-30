@@ -1,11 +1,11 @@
 gradle.ext.buildToolsVersion = '28.0.0'
-gradle.ext.sdkVersion = 21
-gradle.ext.minSdkVersion = 13
-gradle.ext.targetSdkVersion = 26
+gradle.ext.sdkVersion = 28
+gradle.ext.minSdkVersion = 23
+gradle.ext.targetSdkVersion = 28
 gradle.ext.libDistributionRoot = '../distribution'
 
 include ':app'
-include ':freetype'
+/*include ':freetype'
 include ':main'
 include ':SDL2'
 include ':SDL2_gfx'
@@ -14,3 +14,4 @@ include ':SDL2_jpeg'
 include ':SDL2_mixer'
 include ':SDL2_png'
 include ':SDL2_ttf'
+*/
