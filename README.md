@@ -1,6 +1,6 @@
 # SDL2 Android Example
 
-Read article at blog: http://georgik.rocks/tag/sdl2/
+Read article at blog: https://georgik.rocks/tag/sdl2/
 
 Source code:
 
@@ -10,11 +10,9 @@ Source code:
 
 ### Gradle
 
-The project contains Gradle 4.4 wrapper. Gradle 4.7 is not compatible with model from Android Experimental Plugin.
+The project is based on Gradle 5. For older version based on Gradle 4 and Android Experimental Plugin, check out branch gradle-4-using-android-experimental-plugin.
 
 Android build Tools are set to 27.0.3 in file settings.gradle. Make sure to download those tools via Android Studio.
-
-NDK in version 16 (not NDK v17) - more information: https://georgik.rocks/android-studio-ndk-could-not-start-mips64el-linux-android-strip/
 
 
 ### Libraries
@@ -25,31 +23,6 @@ NDK in version 16 (not NDK v17) - more information: https://georgik.rocks/androi
 - libSDL2_jpeg - derrived from https://www.libsdl.org/projects/SDL_image/libs/
     - renamed to SDL2_jpeg from jpeg, because of library name collision in Android 
     https://stackoverflow.com/questions/11613040/why-does-jpeg-decompress-create-crash-without-error-message    
-
-
-## Build
-
-List of build commands for each library. Building libraries one-by-one might help you to identify
-potential problems during compilation.
-
-Commands:
-
-  ```
-  gradle distributeLib
-  gradle installDebug
-  ```
-
-If you want to build library one by one, then you can specify name of library as module name for Gradle
-
-  ```
-  gradle :SDL2:distributeLib
-  gradle :SDL2_gfx:distributeLib
-  gradle :SDL2_png:distributeLib
-  gradle :SDL2_jpeg:distributeLib
-  gradle :SDL2_image:distributeLib
-  gradle :SDL2_mixer:distributeLib
-  gradle installDebug
-  ```
 
 
 ## Assets
