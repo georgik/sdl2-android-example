@@ -1,9 +1,9 @@
 #include "SDL.h"
 #include "SDL_image.h"
-/*#include "SDL_mixer.h"
+//#include "SDL_mixer.h"
 #include "SDL2_gfxPrimitives.h"
-#include "SDL_ttf.h"
-*/
+//#include "SDL_ttf.h"
+
 static char * icon_xpm[] = {
         "32 23 3 1",
         "     c #FFFFFF",
@@ -152,10 +152,10 @@ int SDL_main(int argc, char* argv[]) {
     SDL_Texture* solidTexture = SDL_CreateTextureFromSurface(renderer, solid);
     SDL_RenderCopy(renderer, solidTexture, NULL, &dstrect);
     SDL_FreeSurface(solid);
-
+*/
     // SDL2_gfx example
     thickLineColor(renderer, 0, 300, 300, 300, 20, 0xFF00FFFF) ;
-*/
+
     // Render to the screen
     SDL_RenderPresent(renderer);
 

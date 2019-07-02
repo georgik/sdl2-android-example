@@ -7,10 +7,12 @@ include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/../SDL2/src
 
         ${CMAKE_CURRENT_SOURCE_DIR}/../SDL2_image/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../SDL2_gfx/include
 )
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../SDL2/ ${CMAKE_CURRENT_SOURCE_DIR}/../SDL2)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../SDL2_image/ ${CMAKE_CURRENT_SOURCE_DIR}/../SDL2_image)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../SDL2_gfx/ ${CMAKE_CURRENT_SOURCE_DIR}/../SDL2_gfx)
 
 add_library(
              main-lib
@@ -35,5 +37,6 @@ target_link_libraries( # Specifies the target library.
                         main-lib
                         SDL2
                         SDL2_image
+                        SDL2_gfx
 
                         ${log-lib} )
