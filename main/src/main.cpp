@@ -100,14 +100,14 @@ int SDL_main(int argc, char* argv[]) {
                      "Couldn't load PNG image: %s", SDL_GetError());
         return 5;
     }
-/*
+
     SDL_Surface *backgroundSurface = IMG_Load("brno-snow.jpg");
     if (!backgroundSurface) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't load JPG image: %s", SDL_GetError());
         return 6;
     }
-
+/*
     // Initialize TTF
     if (TTF_Init() == -1) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "TTF_Init: %s\n", TTF_GetError());
@@ -121,7 +121,7 @@ int SDL_main(int argc, char* argv[]) {
                      "Unable to load font: %s\n", TTF_GetError());
         return 8;
     }
-
+*/
     dstrect.x = 0;
     dstrect.y = 0;
     dstrect.w = backgroundSurface->w;
@@ -141,7 +141,7 @@ int SDL_main(int argc, char* argv[]) {
     dstrect.w = 128;
     dstrect.h = 128;
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
-
+/*
     dstrect.x = 0;
     dstrect.y = 0;
     dstrect.w = 450;
@@ -155,7 +155,7 @@ int SDL_main(int argc, char* argv[]) {
 
     // SDL2_gfx example
     thickLineColor(renderer, 0, 300, 300, 300, 20, 0xFF00FFFF) ;
-
+*/
     // Render to the screen
     SDL_RenderPresent(renderer);
 
@@ -174,7 +174,7 @@ int SDL_main(int argc, char* argv[]) {
                 break;
 
             case SDL_FINGERDOWN: {
-                Mix_PlayChannel(-1, sample, 0);
+//                Mix_PlayChannel(-1, sample, 0);
                 dstrect.x = event.tfinger.x * loadedSurface->w;
                 dstrect.y = event.tfinger.y * loadedSurface->h;
                 dstrect.w = 128;
@@ -188,8 +188,8 @@ int SDL_main(int argc, char* argv[]) {
         }
     }
 
-    Mix_CloseAudio();
-*/
+//    Mix_CloseAudio();
+
     // Close and destroy the window
     SDL_DestroyWindow(window);
 
