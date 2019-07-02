@@ -1,6 +1,6 @@
 #include "SDL.h"
-/*#include "SDL_image.h"
-#include "SDL_mixer.h"
+#include "SDL_image.h"
+/*#include "SDL_mixer.h"
 #include "SDL2_gfxPrimitives.h"
 #include "SDL_ttf.h"
 */
@@ -68,7 +68,7 @@ int SDL_main(int argc, char* argv[]) {
         fprintf(stderr, "Unable to load wave file\n");
         return 3;
     }
-
+*/
 
     // Setup renderer
     SDL_Renderer* renderer = NULL;
@@ -90,7 +90,7 @@ int SDL_main(int argc, char* argv[]) {
 
     // Display image
     SDL_Rect dstrect;
-
+/*
 
     // Load smiley.png and display it.
     // Location of image files for Android is: app/src/main/assets
