@@ -1,5 +1,5 @@
-/*#include "SDL.h"
-#include "SDL_image.h"
+#include "SDL.h"
+/*#include "SDL_image.h"
 #include "SDL_mixer.h"
 #include "SDL2_gfxPrimitives.h"
 #include "SDL_ttf.h"
@@ -33,8 +33,8 @@ static char * icon_xpm[] = {
         "            ........            ",
         "                                "};
 
-int main(int argc, char* argv[]) {
-/*
+int SDL_main(int argc, char* argv[]) {
+
     SDL_Window *window;                    // Declare a pointer
     SDL_Surface *surface;
     SDL_Texture *texture;
@@ -56,7 +56,7 @@ int main(int argc, char* argv[]) {
         printf("Could not create window: %s\n", SDL_GetError());
         return 1;
     }
-
+/*
     if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1 ) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't open mixer: %s", SDL_GetError());
@@ -189,12 +189,12 @@ int main(int argc, char* argv[]) {
     }
 
     Mix_CloseAudio();
-
+*/
     // Close and destroy the window
     SDL_DestroyWindow(window);
 
     // Clean up
     SDL_Quit();
-    */
+
     return 0;
 }
