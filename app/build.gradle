@@ -1,7 +1,11 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.application'
 
-model {
-    repositories {
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+/*model {*/
+  /*  repositories {
         libs(PrebuiltLibraries) {
             SDL2 {
                 headers.srcDir "../SDL2/include"
@@ -16,17 +20,16 @@ model {
             }
         }
     }
-
+*/
     android {
         compileSdkVersion = gradle.sdkVersion
-        buildToolsVersion = gradle.buildToolsVersion
 
         defaultConfig {
             applicationId = 'rocks.georgik.sdlapp'
-            minSdkVersion.apiLevel = gradle.minSdkVersion
-            targetSdkVersion.apiLevel = gradle.targetSdkVersion
+            minSdkVersion gradle.minSdkVersion
+            targetSdkVersion gradle.targetSdkVersion
         }
-        sources {
+       /* sources {
             main {
                 jni {
                     dependencies {
@@ -38,8 +41,8 @@ model {
                         srcDir "${gradle.libDistributionRoot}/main/lib"
                     }   
                 }   
-            }   
-        }   
+            }
+        }   */
 
         buildTypes {
             release {
@@ -47,15 +50,29 @@ model {
                 proguardFiles.add(file('proguard-rules.txt'))
             }
         }
+        externalNativeBuild {
+            cmake {
+                path "../main/CMakeLists.txt"
+                //path "../SDL2/CMakeLists.txt"
+                version "3.10.2"
+            }
+        }
     }
-}
+/*}*/
 
 dependencies {
-    compile 'com.android.support.constraint:constraint-layout:+'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:+'
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
-
+/*
 tasks.whenTaskAdded { task ->
     if (task.name.contains('compile')) {
         task.dependsOn ':main:distributeLib'
     }
-}
+}*/

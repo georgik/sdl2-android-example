@@ -33,7 +33,7 @@ static char * icon_xpm[] = {
         "            ........            ",
         "                                "};
 
-int main(int argc, char* argv[]) {
+int SDL_main(int argc, char* argv[]) {
 
     SDL_Window *window;                    // Declare a pointer
     SDL_Surface *surface;
@@ -195,5 +195,6 @@ int main(int argc, char* argv[]) {
 
     // Clean up
     SDL_Quit();
+
     return 0;
 }
