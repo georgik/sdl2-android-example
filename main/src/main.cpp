@@ -2,7 +2,7 @@
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include "SDL2_gfxPrimitives.h"
-//#include "SDL_ttf.h"
+#include "SDL_ttf.h"
 
 static char * icon_xpm[] = {
         "32 23 3 1",
@@ -107,7 +107,7 @@ int SDL_main(int argc, char* argv[]) {
                      "Couldn't load JPG image: %s", SDL_GetError());
         return 6;
     }
-/*
+
     // Initialize TTF
     if (TTF_Init() == -1) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "TTF_Init: %s\n", TTF_GetError());
@@ -121,7 +121,7 @@ int SDL_main(int argc, char* argv[]) {
                      "Unable to load font: %s\n", TTF_GetError());
         return 8;
     }
-*/
+
     dstrect.x = 0;
     dstrect.y = 0;
     dstrect.w = backgroundSurface->w;
@@ -141,7 +141,7 @@ int SDL_main(int argc, char* argv[]) {
     dstrect.w = 128;
     dstrect.h = 128;
     SDL_RenderCopy(renderer, texture, NULL, &dstrect);
-/*
+
     dstrect.x = 0;
     dstrect.y = 0;
     dstrect.w = 450;
@@ -152,7 +152,7 @@ int SDL_main(int argc, char* argv[]) {
     SDL_Texture* solidTexture = SDL_CreateTextureFromSurface(renderer, solid);
     SDL_RenderCopy(renderer, solidTexture, NULL, &dstrect);
     SDL_FreeSurface(solid);
-*/
+
     // SDL2_gfx example
     thickLineColor(renderer, 0, 300, 300, 300, 20, 0xFF00FFFF) ;
 
