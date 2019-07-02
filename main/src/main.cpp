@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "SDL_image.h"
-//#include "SDL_mixer.h"
+#include "SDL_mixer.h"
 #include "SDL2_gfxPrimitives.h"
 //#include "SDL_ttf.h"
 
@@ -56,7 +56,7 @@ int SDL_main(int argc, char* argv[]) {
         printf("Could not create window: %s\n", SDL_GetError());
         return 1;
     }
-/*
+
     if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1 ) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
                      "Couldn't open mixer: %s", SDL_GetError());
@@ -68,7 +68,7 @@ int SDL_main(int argc, char* argv[]) {
         fprintf(stderr, "Unable to load wave file\n");
         return 3;
     }
-*/
+
 
     // Setup renderer
     SDL_Renderer* renderer = NULL;
@@ -174,7 +174,7 @@ int SDL_main(int argc, char* argv[]) {
                 break;
 
             case SDL_FINGERDOWN: {
-//                Mix_PlayChannel(-1, sample, 0);
+                Mix_PlayChannel(-1, sample, 0);
                 dstrect.x = event.tfinger.x * loadedSurface->w;
                 dstrect.y = event.tfinger.y * loadedSurface->h;
                 dstrect.w = 128;
@@ -188,7 +188,7 @@ int SDL_main(int argc, char* argv[]) {
         }
     }
 
-//    Mix_CloseAudio();
+    Mix_CloseAudio();
 
     // Close and destroy the window
     SDL_DestroyWindow(window);
