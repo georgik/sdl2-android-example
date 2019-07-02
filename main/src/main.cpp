@@ -90,7 +90,7 @@ int SDL_main(int argc, char* argv[]) {
 
     // Display image
     SDL_Rect dstrect;
-/*
+
 
     // Load smiley.png and display it.
     // Location of image files for Android is: app/src/main/assets
@@ -100,7 +100,7 @@ int SDL_main(int argc, char* argv[]) {
                      "Couldn't load PNG image: %s", SDL_GetError());
         return 5;
     }
-
+/*
     SDL_Surface *backgroundSurface = IMG_Load("brno-snow.jpg");
     if (!backgroundSurface) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
