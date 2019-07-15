@@ -49,7 +49,6 @@ add_library( # Sets the name of the library.
         SHARED
 
         src/pngrio.c
-        src/pngtest.c
         src/pngwtran.c
         src/pngwutil.c
         src/pngread.c
