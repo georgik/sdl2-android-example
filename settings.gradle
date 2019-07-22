@@ -5,13 +5,3 @@ gradle.ext.targetSdkVersion = 28
 gradle.ext.libDistributionRoot = '../distribution'
 
 include ':app'
-/*include ':freetype'
-include ':main'
-include ':SDL2'
-include ':SDL2_gfx'
-include ':SDL2_image'
-include ':SDL2_jpeg'
-include ':SDL2_mixer'
-include ':SDL2_png'
-include ':SDL2_ttf'
-*/
