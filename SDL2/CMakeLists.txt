@@ -159,6 +159,24 @@ add_library( # Sets the name of the library.
         src/SDL_log.c
         src/SDL_hints.c
 
+        src/libm/s_sin.c
+        src/libm/s_cos.c
+        src/libm/s_copysign.c
+        src/libm/s_fabs.c
+        src/libm/k_rem_pio2.c
+        src/libm/k_sin.c
+        src/libm/s_atan.c
+        src/libm/k_cos.c
+        src/libm/s_scalbn.c
+        src/libm/e_pow.c
+        src/libm/e_atan2.c
+        src/libm/s_tan.c
+        src/libm/e_rem_pio2.c
+        src/libm/e_log.c
+        src/libm/e_sqrt.c
+        src/libm/s_floor.c
+        src/libm/k_tan.c
+
        )
 
 
