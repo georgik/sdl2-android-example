@@ -43,11 +43,53 @@ apply plugin: 'kotlin-android-extensions'
                 }   
             }
         }   */
+        productFlavors {
+            flavorDimensions 'abi'
+            
+            arm {
+                ndk {
+                    abiFilter 'armeabi-v7a'
+                }
+            }
+            arm64 {
+                ndk {
+                    abiFilter 'arm64-v8a'
+                }
+            }
+            x86 {
+                ndk {
+                    abiFilter 'x86'
+                }
+            }
+            x86_64 {
+                ndk {
+                    abiFilter 'x86_64'
+                }
+            }
+            all_in_one {
+                ndk {
+                    //abiFilter 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+                }
+            }
+        }
+        signingConfigs {
+            release {
+                storeFile file("keystore-path")
+                storePassword "keystore-pass"
+                keyAlias "alias"
+                keyPassword "alias-password"
 
+                // Optional, specify signing versions used
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
         buildTypes {
             release {
                 minifyEnabled = false
                 proguardFiles.add(file('proguard-rules.txt'))
+                // Uncomment to enable apk signing (and also fill details in signingConfigs Block)
+                //signingConfig signingConfigs.release
             }
         }
         externalNativeBuild {

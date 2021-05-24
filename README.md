@@ -10,9 +10,9 @@ Source code:
 
 ### Gradle
 
-The project is based on Gradle 5. For older version based on Gradle 4 and Android Experimental Plugin, check out branch gradle-4-using-android-experimental-plugin.
+The project is compatible with Gradle 5 & 6. For older version based on Gradle 4 and Android Experimental Plugin, check out branch gradle-4-using-android-experimental-plugin.
 
-Android build Tools are set to 27.0.3 in file settings.gradle. Make sure to download those tools via Android Studio.
+Android build Tools are set to v28.0.0 in file settings.gradle. Make sure to download those tools via Android Studio.
 
 
 ### Libraries
